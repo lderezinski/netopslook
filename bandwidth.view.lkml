@@ -5,6 +5,11 @@ view: bandwidth {
     type: string
     sql: ${TABLE}."az" ;;
   }
+  dimension: compound_primary_key {
+    primary_key: yes
+    hidden: yes
+    sql: ${TABLE}."date" || ${TABLE}."isp" || ${TABLE}."region" || ${TABLE}."type" || ${TABLE}."circuit_name"|| ${TABLE}."direction";;
+  }
 
   dimension: circuit_name {
     type: string
@@ -52,6 +57,14 @@ view: bandwidth {
 
   measure: count {
     type: count
-    drill_fields: [circuit_name]
+    drill_fields: [circuit_name,date_time,direction,isp,region,value]
+  }
+  measure: value_sum {
+    type: sum
+    sql: ${TABLE}."value" ;;
+  }
+  measure: value_avg {
+    type: average
+    sql: ${TABLE}."value" ;;
   }
 }
