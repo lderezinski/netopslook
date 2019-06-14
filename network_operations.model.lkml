@@ -10,4 +10,8 @@ datagroup: network_operations_default_datagroup {
 
 persist_with: network_operations_default_datagroup
 
-explore: bandwidth {}
+explore: bandwidth {
+  description: "ISP bandwidth"
+  group_label: "ISP"
+  view_label: "bw"
+}
