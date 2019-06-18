@@ -14,13 +14,7 @@ persist_with: network_operations_default_datagroup
 explore: bandwidth {
   description: "Circuit Bandwidth"
   group_label: "Circuits"
-  view_label: "bw"
+  view_label: "bandwidth"
 
 }
-explore: az {}
-
-explore: isp {}
-
-explore: metric {}
-
-explore: percentiles {}
+explore: ispregiondata {}
