@@ -4,12 +4,13 @@ view: percentiles {
 direction,
 region,
 isp,
-(percentile_cont(0.95) within group ( order by value))/1000000 as percentile,
-(avg(value)/1000000) as average,
+date_part('month',date) as month,
+percentile_cont(0.95) within group ( order by value) as percentile,
+avg(value) as average,
 count(value) as datapoints
 from
 circuit.ispsumvalues
-group by direction,region,isp;;
+group by direction,region,isp,date_part('month',date);;
   }
 
   dimension:  Region{
@@ -30,9 +31,17 @@ group by direction,region,isp;;
   dimension: Percentile {
     type: number
     description: "95th Percentile of this Data over a given period of time"
-    sql:  ${TABLE}.percentile ;;
+    sql:  ${TABLE}.percentile
+    value_format: "0.000,,\" Mbps\"";;
+  }
+  dimension: Average {
+    type: number
+    description: "Average of this Data over a given period of time"
+    sql:  ${TABLE}.average
+      value_format: "0.000,,\" Mbps\"";;
   }
 }
+
 # view: percentiles {
 #   # Or, you could make this view a derived table, like this:
 #   derived_table: {
