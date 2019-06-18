@@ -1,25 +1,15 @@
 view: percentiles {
   derived_table: {
-    sql:  drop table IF EXISTS sumvalues;
-    select sum(b.value) as value,b.date,m.direction,a.region,i.name as isp,date_part('month',b.date) as mth
-    into TEMP TABLE sumvalues
-    from circuit.bandwidth as b
-    join circuit.metric as m on m.metricid=b.metricid
-    join circuit.az as a on a.azid=m.azid
-    join circuit.isp as i on i.ispid=m.ispid
-    where date_part('month',b.date)=6
-    group by b.date,m.direction,a.region,i.name;
-    select
-    direction,
-    region,
-    isp,
-    mth,
-    (percentile_cont(0.95) within group ( order by value))/1000000 as percentile,
-    (avg(value)/1000000) as average,
-    count(value) as datapoints
-    from
-    sumvalues
-    group by direction,region,isp,mth;;
+    sql:  select
+direction,
+region,
+isp,
+(percentile_cont(0.95) within group ( order by value))/1000000 as percentile,
+(avg(value)/1000000) as average,
+count(value) as datapoints
+from
+circuit.ispsumvalues
+group by direction,region,isp;;
   }
 
   dimension:  Region{
