@@ -17,3 +17,8 @@ explore: bandwidth {
   view_label: "bw"
 
 }
+explore: az {}
+
+explore: isp {}
+
+explore: metric {}
