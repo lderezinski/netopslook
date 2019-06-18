@@ -12,8 +12,8 @@ datagroup: network_operations_default_datagroup {
 persist_with: network_operations_default_datagroup
 
 explore: bandwidth {
-  description: "ISP bandwidth"
-  group_label: "ISP"
+  description: "Circuit bandwidth"
+  group_label: "Circuits"
   view_label: "bw"
 
 }
