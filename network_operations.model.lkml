@@ -12,7 +12,7 @@ datagroup: network_operations_default_datagroup {
 persist_with: network_operations_default_datagroup
 
 explore: bandwidth {
-  description: "Circuit bandwidth"
+  description: "Circuit Bandwidth"
   group_label: "Circuits"
   view_label: "bw"
 
