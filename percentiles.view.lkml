@@ -30,15 +30,16 @@ group by direction,region,isp,date_part('month',date);;
   }
   dimension: Percentile {
     type: number
+    value_format: "0.000,,\" Mbps\""
     description: "95th Percentile of this Data over a given period of time"
-    sql:  ${TABLE}.percentile
-    value_format: "0.000,,\" Mbps\"";;
+    sql:  ${TABLE}.percentile;;
   }
   dimension: Average {
     type: number
+    value_format: "0.000,,\" Mbps\""
     description: "Average of this Data over a given period of time"
-    sql:  ${TABLE}.average
-      value_format: "0.000,,\" Mbps\"";;
+    sql:  ${TABLE}.average;;
+
   }
 }
 
