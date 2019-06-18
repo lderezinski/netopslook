@@ -22,3 +22,5 @@ explore: az {}
 explore: isp {}
 
 explore: metric {}
+
+explore: percentiles {}
