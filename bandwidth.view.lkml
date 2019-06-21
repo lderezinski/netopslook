@@ -28,9 +28,21 @@ view: bandwidth {
     sql: ${TABLE}."metricid" ;;
   }
 
+  dimension: ispid {
+    type: number
+    value_format_name: id
+    # hidden: yes
+    sql: ${TABLE}."ispid" ;;
+  }
+
   dimension: value {
     type: number
     sql: ${TABLE}."value" ;;
+  }
+  measure: sum {
+    type: sum
+    value_format: "0.000,,\" Mbps\""
+    sql: ${TABLE}.value ;;
   }
 
   measure: count {

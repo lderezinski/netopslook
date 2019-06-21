@@ -1,11 +1,11 @@
-view: ispregiondata {
+view: ispazdata {
   derived_table: {
-    sql:  select sum(b.value) as value,b.date,m.direction,a.region,i.name as isp
-from circuit.bandwidth as b
-join circuit.metric as m on m.metricid=b.metricid
-join circuit.az as a on a.azid=m.azid
-join circuit.isp as i on i.ispid=m.ispid
-group by b.date,m.direction,a.region,i.name;;
+    sql:  select sum(b.value) as value,b.date,m.direction,a.region,a.name as az
+      from circuit.bandwidth as b
+      join circuit.metric as m on m.metricid=b.metricid
+      join circuit.az as a on a.azid=m.azid
+      join circuit.isp as i on i.ispid=m.ispid
+      group by b.date,m.direction,a.region,a.name;;
   }
 
   dimension:  Region{
@@ -18,16 +18,10 @@ group by b.date,m.direction,a.region,i.name;;
     description: "Direction of data In or Out"
     sql:  ${TABLE}.direction ;;
   }
-  dimension:  ISP{
+  dimension:  AZ{
     type: string
-    description: "Vendor Providing the Circuit"
-    sql:  ${TABLE}.isp ;;
-  }
-  dimension: value {
-    type: number
-    value_format: "0.000,,\" Mbps\""
-    description: "95th Percentile of this Data over a given period of time"
-    sql:  ${TABLE}.percentile;;
+    description: "AZ within region"
+    sql:  ${TABLE}.az ;;
   }
 
   dimension_group: date {
@@ -43,19 +37,19 @@ group by b.date,m.direction,a.region,i.name;;
     ]
     sql: ${TABLE}."date" ;;
   }
-  measure: bandwidth_95th_percentile {
+  measure: 95th_percentile {
     type: percentile
     percentile: 95
     value_format: "0.000,,\" Mbps\""
     sql: ${TABLE}.value ;;
   }
-  measure: bandwidth_average {
+  measure: average {
     type: average
     value_format: "0.000,,\" Mbps\""
     sql: ${TABLE}.value ;;
   }
   measure: count {
     type: count
-    drill_fields: [Region,ISP]
+    drill_fields: [Region,AZ]
   }
 }
