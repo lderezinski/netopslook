@@ -11,6 +11,20 @@ datagroup: network_operations_default_datagroup {
 
 persist_with: network_operations_default_datagroup
 
+explore: Events {
+  from:  events
+  group_label: "Opennms Events"
+  view_label: "Sorted Events"
+  description: "All events broken down by datacenter"
+  join: az{
+    view_label: "RegionDetails"
+    sql_on: ${Events.azid}=${az.azid} ;;
+    type: left_outer
+    relationship: many_to_one
+    fields: [az.region]
+  }
+}
+
 explore: Bandwidth {
   from:  bandwidth
   group_label: "ISP Bandwidth"
