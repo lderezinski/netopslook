@@ -21,6 +21,7 @@ view: events {
   }
 
   dimension: label {
+    label: "Device Label"
     type:  string
     sql: ${TABLE}."label" ;;
   }
@@ -34,37 +35,19 @@ view: events {
     type:  string
     sql: ${TABLE}."uei" ;;
   }
-  dimension_group: maxdate {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}."maxdate" ;;
-  }
-
-  dimension_group: mindate {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}."mindate" ;;
-  }
 
   measure: count {
     type:  sum
     sql: ${TABLE}."count" ;;
+  }
+  measure: maxdate {
+    type: date
+    sql: MAX(${TABLE}."maxdate") ;;
+  }
+
+  measure: mindate{
+    type: date
+    sql: MIN(${TABLE}."mindate") ;;
   }
 
 
