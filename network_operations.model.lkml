@@ -45,7 +45,7 @@ explore: Bandwidth {
   }
   join: isp {
     view_label: "ISPDetails"
-    sql_on: ${Bandwidth.ispid}=${isp.ispid} ;;
+    sql_on: ${metric.ispid}=${isp.ispid} ;;
     type: left_outer
     relationship: many_to_one
   }
