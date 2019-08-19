@@ -49,4 +49,26 @@ view: bandwidth {
     type: count
     drill_fields: [id, metric.metricid, metric.circuit_name, metric.name]
   }
+
+  measure: 95th_percentile {
+    type: percentile
+    percentile: 95
+    value_format: "0.000,,\" Mbps\""
+    sql: ${TABLE}.value ;;
+  }
+  measure: average {
+    type: average
+    value_format: "0.000,,\" Mbps\""
+    sql: ${TABLE}.value ;;
+  }
+
+  measure: maxdate {
+    type: date
+    sql: MAX(${TABLE}."date") ;;
+  }
+
+  measure: mindate{
+    type: date
+    sql: MIN(${TABLE}."date") ;;
+  }
 }
