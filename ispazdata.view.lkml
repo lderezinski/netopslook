@@ -6,6 +6,8 @@ view: ispazdata {
       join circuit.az as a on a.azid=m.azid
       join circuit.isp as i on i.ispid=m.ispid
       group by b.date,m.direction,a.region,a.name;;
+    indexes: ["value","metricid"]
+    persist_for: "24 hours"
   }
 
   dimension:  Region{
