@@ -56,4 +56,13 @@ group by b.date,m.direction,a.region,i.name;;
     type: count
     drill_fields: [Region,ISP]
   }
+
+  measure: maxdate {
+    type:  max
+    sql:  ${TABLE}."date" ;;
+  }
+  measure: mindate {
+    type:  min
+    sql:  ${TABLE}."date" ;;
+  }
 }
