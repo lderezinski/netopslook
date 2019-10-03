@@ -52,12 +52,6 @@ explore: Bandwidth {
 
 }
 
-explore: By_AZ {
-  from: ispazdata
-  description: "ISP Bandwidth data by Region"
-  group_label: "ISP Bandwidth"
-  view_label: "Bandwidth By AZ"
-}
 explore: By_ISP{
   from: ispregiondata
   description: "ISP Bandwidth data by ISP"

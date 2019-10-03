@@ -4,19 +4,8 @@ view: metric {
   dimension: metricid {
     primary_key: yes
     type: number
+    hidden: yes
     sql: ${TABLE}."metricid" ;;
-  }
-
-  dimension: azid {
-    type: number
-    value_format_name: id
-    # hidden: yes
-    sql: ${TABLE}."azid" ;;
-  }
-
-  dimension: circuit_name {
-    type: string
-    sql: ${TABLE}."circuit_name" ;;
   }
 
   dimension: direction {
@@ -24,34 +13,19 @@ view: metric {
     sql: ${TABLE}."direction" ;;
   }
 
+  dimension: circuit_name {
+    type: string
+    sql: ${TABLE}."circuit_name" ;;
+  }
+  dimension: azid {
+    type: number
+    hidden: yes
+    sql: ${TABLE}."azid" ;;
+  }
   dimension: ispid {
     type: number
-    value_format_name: id
-    # hidden: yes
+    hidden: yes
     sql: ${TABLE}."ispid" ;;
   }
 
-  dimension: name {
-    type: string
-    sql: ${TABLE}."name" ;;
-  }
-
-  measure: count {
-    type: count
-    drill_fields: [detail*]
-  }
-
-  # ----- Sets of fields for drilling ------
-  set: detail {
-    fields: [
-      metricid,
-      circuit_name,
-      name,
-      az.name,
-      az.azid,
-      isp.ispid,
-      isp.name,
-      bandwidth.count
-    ]
-  }
 }

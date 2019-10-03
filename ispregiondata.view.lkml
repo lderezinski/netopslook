@@ -7,7 +7,7 @@ join circuit.metric as m on m.metricid=b.metricid
 join circuit.az as a on a.azid=m.azid
 join circuit.isp as i on i.ispid=m.ispid
 group by b.date,m.direction,a.region,i.name;;
-    indexes: ["value","metricid"]
+    indexes: ["value"]
     persist_for: "24 hours"
   }
 
@@ -40,6 +40,7 @@ group by b.date,m.direction,a.region,i.name;;
     ]
     sql: ${TABLE}."date" ;;
   }
+
   measure: 95th_percentile {
     type: percentile
     percentile: 95

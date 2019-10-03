@@ -4,6 +4,7 @@ view: bandwidth {
   dimension: id {
     primary_key: yes
     type: number
+    hidden: yes
     sql: ${TABLE}."id" ;;
   }
 
@@ -24,19 +25,20 @@ view: bandwidth {
   dimension: metricid {
     type: number
     value_format_name: id
-    # hidden: yes
+     hidden: yes
     sql: ${TABLE}."metricid" ;;
   }
 
   dimension: ispid {
     type: number
     value_format_name: id
-    # hidden: yes
+     hidden: yes
     sql: ${TABLE}."ispid" ;;
   }
 
   dimension: value {
     type: number
+    hidden: yes
     sql: ${TABLE}."value" ;;
   }
   measure: sum {

@@ -4,6 +4,7 @@ view: az {
   dimension: azid {
     primary_key: yes
     type: number
+    hidden: yes
     sql: ${TABLE}."azid" ;;
   }
 
