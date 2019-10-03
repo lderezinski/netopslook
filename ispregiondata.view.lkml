@@ -47,6 +47,27 @@ group by b.date,m.direction,a.region,i.name;;
     value_format: "0.000,,\" Mbps\""
     sql: ${TABLE}.value ;;
   }
+
+  measure: cost {
+    type: number
+    value_format: "$0.00,,"
+    sql: CASE
+    WHEN ${TABLE}.isp = 'ntt' THEN (greatest(0,(${95th_percentile}-12000000000)))*1.97
+    WHEN ${TABLE}.isp = 'dt' THEN (greatest(0,(${95th_percentile}-12000000000)))*1.50
+    WHEN ${TABLE}.isp = 'telia' THEN (greatest(0,(${95th_percentile}-1000000000)))*.65
+    WHEN ${TABLE}.isp = 'level3' THEN (greatest(0,(${95th_percentile}-6000000000)))*.75
+    WHEN ${TABLE}.isp = 'pccw' THEN (greatest(0,(${95th_percentile}-12000000000)))*2.80
+    WHEN ${TABLE}.isp = 'singtel' THEN (greatest(0,(${95th_percentile}-12000000000)))*2.28
+    WHEN ${TABLE}.isp = 'ntt' THEN (greatest(0,(${95th_percentile}-12000000000)))*1.97
+    WHEN ${TABLE}.isp = 'att' THEN (greatest(0,(${95th_percentile}-30000000000)))*6.38
+    WHEN ${TABLE}.isp = 'level3' THEN (greatest(0,(${95th_percentile}-6000000000)))*1.03
+    WHEN ${TABLE}.isp = 'zayo' THEN (greatest(0,(${95th_percentile}-20000000000)))*1.75
+    WHEN ${TABLE}.isp = 'telia' THEN (greatest(0,(${95th_percentile}-25000000000)))*.65
+    WHEN ${TABLE}.isp = 'kt' THEN (greatest(0,(${95th_percentile}-6000000000)))*11.95
+    WHEN ${TABLE}.isp = 'kinx' THEN (greatest(0,(${95th_percentile}-6000000000)))*5.31
+    ELSE 0
+    END;;
+  }
   measure: average {
     type: average
     value_format: "0.000,,\" Mbps\""
@@ -58,11 +79,11 @@ group by b.date,m.direction,a.region,i.name;;
   }
 
   measure: maxdate {
-    type:  max
-    sql:  ${TABLE}."date" ;;
+    type:  date
+    sql:  MAX(${TABLE}."date");;
   }
   measure: mindate {
-    type:  min
-    sql:  ${TABLE}."date" ;;
+    type:  date
+    sql:  MIN(${TABLE}."date");;
   }
 }
