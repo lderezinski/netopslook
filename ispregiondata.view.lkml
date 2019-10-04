@@ -48,6 +48,48 @@ group by b.date,m.direction,a.region,i.name;;
     sql: ${TABLE}.value ;;
   }
 
+  dimension: perMbpscost {
+    type:  number
+    value_format: "$0.00 \"per Mbps\""
+    sql: CASE
+    WHEN ${TABLE}.isp = 'ntt' THEN 1.97
+    WHEN ${TABLE}.isp = 'dt' THEN 1.50
+    WHEN ${TABLE}.isp = 'telia' THEN .65
+    WHEN ${TABLE}.isp = 'level3' THEN .75
+    WHEN ${TABLE}.isp = 'pccw' THEN 2.80
+    WHEN ${TABLE}.isp = 'singtel' THEN 2.28
+    WHEN ${TABLE}.isp = 'ntt' THEN 1.97
+    WHEN ${TABLE}.isp = 'att' THEN 6.38
+    WHEN ${TABLE}.isp = 'level3' THEN 1.03
+    WHEN ${TABLE}.isp = 'zayo' THEN 1.75
+    WHEN ${TABLE}.isp = 'telia' THEN .65
+    WHEN ${TABLE}.isp = 'kt' THEN 11.95
+    WHEN ${TABLE}.isp = 'kinx' THEN 5.31
+    ELSE 0
+    END;;
+  }
+
+  measure: cir {
+    type:  number
+    value_format: "0.000,,\" Mbps\""
+    sql: CASE
+          WHEN ${TABLE}.isp = 'ntt' THEN 12000000000
+          WHEN ${TABLE}.isp = 'dt' THEN 12000000000
+          WHEN ${TABLE}.isp = 'telia' THEN 1000000000
+          WHEN ${TABLE}.isp = 'level3' THEN 6000000000
+          WHEN ${TABLE}.isp = 'pccw' THEN 12000000000
+          WHEN ${TABLE}.isp = 'singtel' THEN 12000000000
+          WHEN ${TABLE}.isp = 'ntt' THEN 12000000000
+          WHEN ${TABLE}.isp = 'att' THEN 30000000000
+          WHEN ${TABLE}.isp = 'level3' THEN 6000000000
+          WHEN ${TABLE}.isp = 'zayo' THEN 20000000000
+          WHEN ${TABLE}.isp = 'telia' THEN 25000000000
+          WHEN ${TABLE}.isp = 'kt' THEN 6000000000
+          WHEN ${TABLE}.isp = 'kinx' THEN 6000000000
+          ELSE 0
+          END;;
+  }
+
   measure: cost {
     type: number
     value_format: "$0.00,,"
