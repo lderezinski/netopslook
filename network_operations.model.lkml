@@ -2,6 +2,7 @@ connection: "joyent"
 
 # include all the views
 include: "*.view"
+include: "*.dashboard.lookml"
 
 
   # sql_trigger: SELECT MAX(id) FROM etl_log;;

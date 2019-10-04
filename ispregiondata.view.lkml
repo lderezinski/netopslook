@@ -55,14 +55,13 @@ group by b.date,m.direction,a.region,i.name;;
     WHEN ${TABLE}.isp = 'ntt' THEN 1.97
     WHEN ${TABLE}.isp = 'dt' THEN 1.50
     WHEN ${TABLE}.isp = 'telia' THEN .65
-    WHEN ${TABLE}.isp = 'level3' THEN .75
+    WHEN ${TABLE}.isp = 'level3' and ${TABLE}.region='eu-central' THEN .75
     WHEN ${TABLE}.isp = 'pccw' THEN 2.80
     WHEN ${TABLE}.isp = 'singtel' THEN 2.28
     WHEN ${TABLE}.isp = 'ntt' THEN 1.97
     WHEN ${TABLE}.isp = 'att' THEN 6.38
-    WHEN ${TABLE}.isp = 'level3' THEN 1.03
+    WHEN ${TABLE}.isp = 'level3' and ${TABLE}.region='us-east' THEN 1.03
     WHEN ${TABLE}.isp = 'zayo' THEN 1.75
-    WHEN ${TABLE}.isp = 'telia' THEN .65
     WHEN ${TABLE}.isp = 'kt' THEN 11.95
     WHEN ${TABLE}.isp = 'kinx' THEN 5.31
     ELSE 0
@@ -75,15 +74,14 @@ group by b.date,m.direction,a.region,i.name;;
     sql: CASE
           WHEN ${TABLE}.isp = 'ntt' THEN 12000000000
           WHEN ${TABLE}.isp = 'dt' THEN 12000000000
-          WHEN ${TABLE}.isp = 'telia' THEN 1000000000
-          WHEN ${TABLE}.isp = 'level3' THEN 6000000000
+          WHEN ${TABLE}.isp = 'telia' THEN 25000000000
+          WHEN ${TABLE}.isp = 'level3' and ${TABLE}.region='us-east' THEN 6000000000
           WHEN ${TABLE}.isp = 'pccw' THEN 12000000000
           WHEN ${TABLE}.isp = 'singtel' THEN 12000000000
           WHEN ${TABLE}.isp = 'ntt' THEN 12000000000
           WHEN ${TABLE}.isp = 'att' THEN 30000000000
-          WHEN ${TABLE}.isp = 'level3' THEN 6000000000
+          WHEN ${TABLE}.isp = 'level3' and ${TABLE}.region='eu-central' THEN 6000000000
           WHEN ${TABLE}.isp = 'zayo' THEN 20000000000
-          WHEN ${TABLE}.isp = 'telia' THEN 25000000000
           WHEN ${TABLE}.isp = 'kt' THEN 6000000000
           WHEN ${TABLE}.isp = 'kinx' THEN 6000000000
           ELSE 0
@@ -96,13 +94,12 @@ group by b.date,m.direction,a.region,i.name;;
     sql: CASE
     WHEN ${TABLE}.isp = 'ntt' THEN (greatest(0,(${95th_percentile}-12000000000)))*1.97
     WHEN ${TABLE}.isp = 'dt' THEN (greatest(0,(${95th_percentile}-12000000000)))*1.50
-    WHEN ${TABLE}.isp = 'telia' THEN (greatest(0,(${95th_percentile}-1000000000)))*.65
-    WHEN ${TABLE}.isp = 'level3' THEN (greatest(0,(${95th_percentile}-6000000000)))*.75
+    WHEN ${TABLE}.isp = 'level3' and ${TABLE}.region='eu-central' THEN (greatest(0,(${95th_percentile}-6000000000)))*.75
     WHEN ${TABLE}.isp = 'pccw' THEN (greatest(0,(${95th_percentile}-12000000000)))*2.80
     WHEN ${TABLE}.isp = 'singtel' THEN (greatest(0,(${95th_percentile}-12000000000)))*2.28
     WHEN ${TABLE}.isp = 'ntt' THEN (greatest(0,(${95th_percentile}-12000000000)))*1.97
     WHEN ${TABLE}.isp = 'att' THEN (greatest(0,(${95th_percentile}-30000000000)))*6.38
-    WHEN ${TABLE}.isp = 'level3' THEN (greatest(0,(${95th_percentile}-6000000000)))*1.03
+    WHEN ${TABLE}.isp = 'level3' and ${TABLE}.region='us-east' THEN (greatest(0,(${95th_percentile}-6000000000)))*1.03
     WHEN ${TABLE}.isp = 'zayo' THEN (greatest(0,(${95th_percentile}-20000000000)))*1.75
     WHEN ${TABLE}.isp = 'telia' THEN (greatest(0,(${95th_percentile}-25000000000)))*.65
     WHEN ${TABLE}.isp = 'kt' THEN (greatest(0,(${95th_percentile}-6000000000)))*11.95
