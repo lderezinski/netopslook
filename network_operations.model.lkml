@@ -58,14 +58,6 @@ explore: By_ISP_AGG{
   description: "ISP Bandwidth data by ISP"
   group_label: "ISP Bandwidth"
   view_label: "Bandwidth By ISP"
-
-}
-
-explore: By_ISP{
-  from: ispregiondata
-  description: "ISP Bandwidth data by ISP"
-  group_label: "ISP Bandwidth"
-  view_label: "Bandwidth By ISP"
 }
 
 explore: Telia_Global_AGG{
