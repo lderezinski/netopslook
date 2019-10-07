@@ -39,23 +39,20 @@ view: bandwidthio {
 
   dimension: invalue {
     type: number
-    hidden: yes
     sql: ${TABLE}."invalue" ;;
-  }
-
-  dimension: fuvalue {
-    type: number
-    hidden: yes
-    sql: CASE
-      WHEN ${TABLE}.invalue>${TABLE}.outvalue THEN ${TABLE}.invalue
-      ELSE ${TABLE}.outvalue
-      END;;
   }
 
   dimension: outvalue {
     type: number
-    hidden: yes
     sql: ${TABLE}."outvalue" ;;
+  }
+
+  dimension: fuvalue {
+    type: number
+    sql: CASE
+      WHEN ${TABLE}.invalue>${TABLE}.outvalue THEN ${TABLE}.invalue
+      ELSE ${TABLE}.outvalue
+      END;;
   }
 
   measure: count {

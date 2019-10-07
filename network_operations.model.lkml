@@ -53,6 +53,14 @@ explore: TimeSeries {
   }
 }
 
+explore: By_ISP_AGG{
+  from: ispaggregate
+  description: "ISP Bandwidth data by ISP"
+  group_label: "ISP Bandwidth"
+  view_label: "Bandwidth By ISP"
+
+}
+
 explore: By_ISP{
   from: ispregiondata
   description: "ISP Bandwidth data by ISP"
