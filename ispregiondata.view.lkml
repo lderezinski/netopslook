@@ -27,6 +27,7 @@ group by b.date,m.direction,a.region,i.name;;
     sql:  ${TABLE}.isp ;;
   }
 
+
   dimension_group: date {
     type: time
     timeframes: [

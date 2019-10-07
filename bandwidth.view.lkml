@@ -14,6 +14,7 @@ view: bandwidth {
       raw,
       time,
       date,
+      day_of_month,
       week,
       month,
       quarter,
@@ -41,6 +42,7 @@ view: bandwidth {
     hidden: yes
     sql: ${TABLE}."value" ;;
   }
+
   measure: sum {
     type: sum
     value_format: "0.000,,\" Mbps\""
@@ -49,7 +51,7 @@ view: bandwidth {
 
   measure: count {
     type: count
-    drill_fields: [id, metric.metricid, metric.circuit_name, metric.name]
+    drill_fields: [metric.circuit_name, metric.name]
   }
 
   measure: 95th_percentile {
@@ -58,6 +60,12 @@ view: bandwidth {
     value_format: "0.000,,\" Mbps\""
     sql: ${TABLE}.value ;;
   }
+
+  measure: max95th {
+    type: number
+    sql: MAX(${95th_percentile}) ;;
+  }
+
   measure: average {
     type: average
     value_format: "0.000,,\" Mbps\""

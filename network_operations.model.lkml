@@ -26,31 +26,31 @@ explore: Events {
   }
 }
 
-explore: Bandwidth {
-  from:  bandwidth
+explore: TimeSeries {
+  from:  check
   group_label: "ISP Bandwidth"
-  view_label: "Timeseries"
+  view_label: "Check"
   description: "Bandwidth Timseries 5min increments"
 
-  join: metric {
-    view_label: "MetricDetails"
-    sql_on: ${Bandwidth.metricid}=${metric.metricid} ;;
-    type: left_outer
+  join: bandwidthio {
+    view_label: "Traffic"
+    sql_on: ${TimeSeries.checkid}=${bandwidthio.checkid} ;;
+    type: inner
     relationship: many_to_one
   }
+
   join: az{
     view_label: "RegionDetails"
-    sql_on: ${metric.azid}=${az.azid} ;;
-    type: left_outer
+    sql_on: ${TimeSeries.azid}=${az.azid} ;;
+    type: inner
     relationship: many_to_one
   }
   join: isp {
     view_label: "ISPDetails"
-    sql_on: ${metric.ispid}=${isp.ispid} ;;
-    type: left_outer
+    sql_on: ${TimeSeries.ispid}=${isp.ispid} ;;
+    type: inner
     relationship: many_to_one
   }
-
 }
 
 explore: By_ISP{
