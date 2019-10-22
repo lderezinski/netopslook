@@ -78,7 +78,7 @@ view: ispfuaggregate {
           WHEN ${TABLE}.isp = 'ntt' THEN (greatest(0,(${95th_percentile}-12000000000)))*1.97
           WHEN ${TABLE}.isp = 'att' THEN (greatest(0,(${95th_percentile}-30000000000)))*6.38
           WHEN ${TABLE}.isp = 'level3' and ${TABLE}.region='us-east' THEN (greatest(0,(${95th_percentile}-6000000000)))*1.03
-          WHEN ${TABLE}.isp = 'zayo' THEN (greatest(0,(${95th_percentile}-20000000000)))*1.75
+          WHEN ${TABLE}.isp = 'zayo' THEN (greatest(0,(${95th_percentile}-20000000000)))*.50
           WHEN ${TABLE}.isp = 'telia' THEN (greatest(0,(${95th_percentile}-25000000000)))*.65
           WHEN ${TABLE}.isp = 'kt' THEN (greatest(0,(${95th_percentile}-6000000000)))*11.95
           WHEN ${TABLE}.isp = 'kinx' THEN (greatest(0,(${95th_percentile}-6000000000)))*5.31

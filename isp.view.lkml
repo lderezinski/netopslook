@@ -26,7 +26,7 @@ view: isp {
           WHEN ${TABLE}.name = 'ntt' THEN 1.97
           WHEN ${TABLE}.name = 'att' THEN 6.38
           WHEN ${TABLE}.name = 'level3' and ${az.region}='us-east' THEN 1.03
-          WHEN ${TABLE}.name = 'zayo' THEN 1.75
+          WHEN ${TABLE}.name = 'zayo' THEN .50
           WHEN ${TABLE}.name = 'kt' THEN 11.95
           WHEN ${TABLE}.name = 'kinx' THEN 5.31
           ELSE 0

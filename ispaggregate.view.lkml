@@ -75,7 +75,7 @@ view: ispaggregate {
           WHEN ${TABLE}.isp = 'ntt' THEN 1.97
           WHEN ${TABLE}.isp = 'att' THEN 6.38
           WHEN ${TABLE}.isp = 'level3' and ${TABLE}.region='us-east' THEN 1.03
-          WHEN ${TABLE}.isp = 'zayo' THEN 1.75
+          WHEN ${TABLE}.isp = 'zayo' THEN .50
           WHEN ${TABLE}.isp = 'kt' THEN 11.95
           WHEN ${TABLE}.isp = 'kinx' THEN 5.31
           WHEN ${TABLE}.isp = 'skbb' THEN 7.96
