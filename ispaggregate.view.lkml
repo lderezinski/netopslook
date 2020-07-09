@@ -3,7 +3,7 @@ view: ispaggregate {
   derived_table: {
     sql:  select sum(b.invalue) as invalue,sum(b.outvalue) as outvalue,b.date,a.region,i.name as isp
       from circuit.bandwidthio as b
-      join circuit.check as c on c.checkid=b.checkid
+      join circuit."CHECK" as c on c.checkid=b.checkid
       join circuit.az as a on a.azid=c.azid
       join circuit.isp as i on i.ispid=c.ispid
       group by b.date,a.region,i.name;;
